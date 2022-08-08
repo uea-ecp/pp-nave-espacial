@@ -1,5 +1,6 @@
 ## Projeto de Programas: Nave Espacial
 
+Descrição do projeto:
 1) Usar uma matriz (10X10) para implementar o espaço;
 2) Criar uma nave inimiga e posicionar de forma randômica a nave inimiga na matrix. Para isso obter a linha e coluna de forma randômica para posicionar a nave inimiga em uma determinada célula da matriz
 3) Cria a nave do jogador e posicionar a nave do jogador em uma determinada célula da matrix. O jogador poder movimentar a sua nave pelo espaço, ou seja, posicionar a sua nave em uma determina célula da matriz por meio de coordenadas (linha e coluna) fornecida pelo jogador ao digitar uma determinado  comando (letra, por exemplo) que moverá a nave, por exemplo, para esquerda ou direita. 
