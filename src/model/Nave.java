@@ -12,6 +12,9 @@ public class Nave extends NaveAbstract {
             setSprite("🚀");
         } else setSprite("🛸");
 
+        setEnergy(100);
+        setHp(3);
+
         randomPosition();
     }
 
@@ -42,10 +45,11 @@ public class Nave extends NaveAbstract {
         
         setOldPosX(posActualX);
         setOldPosY(posActualY);
+        System.out.println("x: " + getPosX() + "  y: " + getPosY() + "\noldX" + getOldPosX() + " oldY: " + getOldPosY());
     }
 
     @Override
     public void lostHp() {
-        setHp(getHp()-1);
+        setHp(getHp() - 1);
     }
 }

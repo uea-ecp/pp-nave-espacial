@@ -56,6 +56,16 @@ public class Display {
         System.out.println("______________________");
     }
 
+    public void printScoreboard(int hp, int energy) {
+        System.out.print("Vidas       ");
+        
+        for (int i = 0; i <= hp; i++) {
+            System.out.print(" 💚");
+        }
+        
+        System.out.println("\nEnergia       " + energy);
+    }
+
     public String[][] getScene() {
         return scene;
     }

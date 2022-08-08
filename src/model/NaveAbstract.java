@@ -72,5 +72,4 @@ abstract class NaveAbstract implements NaveInterface {
     public void setPosX(int posX) {
         this.posX = posX;
     }
-    
 }
