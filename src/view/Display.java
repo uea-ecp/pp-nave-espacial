@@ -1,5 +1,6 @@
 package view;
 
+import java.util.Arrays;
 import java.util.List;
 
 import model.Missile;
@@ -56,14 +57,19 @@ public class Display {
     }
     }
 
-    public void printScene() {
+    public void printScene(Nave player, Nave enemy) {
         System.out.println("┍--------------------┒");
-
+        
         for (int i = 0; i < SizeScene; i++) {
             System.out.print("|");
 
             for (int j = 0; j < SizeScene; j++) {
-                System.out.print(scene[i][j] + " ");
+                System.out.print(scene[i][j]);
+
+                if((j == SizeScene - 1) && (player.getPosL() == i
+                    || enemy.getPosL() == i)) {
+                    System.out.print("");
+                } else System.out.print(" ");
             }
             System.out.print("|");
             System.out.print("\n");

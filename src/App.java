@@ -35,12 +35,12 @@ public class App {
     }
 
     static void gaming(){
-        while(player.getEnergy() > 0 && enemy.getEnergy() > 0){
+        while(running && player.getEnergy() > 0 && enemy.getEnergy() > 0){
             scene.printScoreboard(player.getHp(), player.getEnergy());
             scene.updateCharacterPosition(enemy);
             scene.updateCharacterPosition(player);
             
-            scene.printScene();
+            scene.printScene(player, enemy);
             controlPlayer();
         }
     }
@@ -77,9 +77,14 @@ public class App {
         player.lostHp();
         
         if(player.getHp() == 0) {
-            System.out.println("Você perdeu!");
-            running = false;
-            return;
+            System.out.println("\n\n\n\n\n\n\n\n\n\nVocê perdeu! Deseja jogar de novo?");
+            System.out.println("(1) Sim \n(0) Não");
+            if(scanner.nextInt() > 0) {
+                new App();
+            } else {
+                running = false;
+                return;
+            }
         }
     }
 
@@ -90,7 +95,5 @@ public class App {
             System.out.println("Você ganhou!");
             running = false;
         }
-
-        
     }
 }

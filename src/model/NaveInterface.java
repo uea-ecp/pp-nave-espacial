@@ -15,7 +15,7 @@ public interface NaveInterface {
 
     void lostHp();
     void lostEnergy();
-    void randomPosition();
-    int random();
+    void randomPosition(int value);
+    int random(int value);
     void control(String command);
 }

@@ -11,26 +11,33 @@ public class Nave extends NaveAbstract {
 
     // lamina de occam
     public Nave(boolean type) {
+        int value;
+
         if(type) {
             setSprite("🚀");
             missiles = new ArrayList<Missile>();
-        } else setSprite("🛸");
+            value = (Display.getSizeScene() - (Display.getSizeScene()/2)) + 1;
+            randomPosition(value);
+        } else {
+            setSprite("🛸");
+            value = Display.getSizeScene()/2;
+            randomPosition(value);
+        }
 
         setEnergy(100);
         setHp(3);
 
-        randomPosition();
     }
 
     /* Random position of according with scene limit size */
-    public void randomPosition() {
-        setPosL(random());
-        setPosC(random());
+    public void randomPosition(int value) {
+        setPosL(random(value)+1);
+        setPosC(random(value)+1);
     }
     
     /* Random value with scene limit size */
-    public int random() {
-        return (new Random()).nextInt(Display.getSizeScene());
+    public int random(int value) {
+        return (new Random()).nextInt(value) + 1;
     }
 
     public void shoot() {

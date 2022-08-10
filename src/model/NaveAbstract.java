@@ -13,8 +13,8 @@ abstract class NaveAbstract implements NaveInterface {
     private int hp;
     private int energy;
 
-    public abstract void randomPosition();
-    public abstract int random();
+    public abstract void randomPosition(int value);
+    public abstract int random(int value);
     public abstract void control(String command);
     public abstract void lostHp();
     public abstract void lostEnergy();
