@@ -4,33 +4,35 @@ package model;
  * This class implemments the base to 'Naves'
  */
 abstract class NaveAbstract implements NaveInterface {
-    private int posX;
-    private int posY;
-    private int oldPosX;
-    private int oldPosY;
+    private final static int SizeScene = 10;
+    private int posL;
+    private int posC;
+    private int oldPosL;
+    private int oldPosC;
     private String sprite;
     private int hp;
     private int energy;
 
     public abstract void randomPosition();
     public abstract int random();
-    public abstract void move(boolean order);
+    public abstract void control(String command);
     public abstract void lostHp();
+    public abstract void lostEnergy();
 
-    public int getOldPosX() {
-        return oldPosX;
+    public int getOldPosL() {
+        return oldPosL;
     }
 
-    public void setOldPosX(int oldPosX) {
-        this.oldPosX = oldPosX;
+    public void setOldPosL(int oldPosX) {
+        this.oldPosL = oldPosX;
     }
 
-    public int getOldPosY() {
-        return oldPosY;
+    public int getOldPosC() {
+        return oldPosC;
     }
 
-    public void setOldPosY(int oldPosY) {
-        this.oldPosY = oldPosY;
+    public void setOldPosC(int oldPosY) {
+        this.oldPosC = oldPosY;
     }
 
     public int getHp() {
@@ -57,19 +59,23 @@ abstract class NaveAbstract implements NaveInterface {
         this.sprite = sprite;
     }
 
-    public int getPosY() {
-        return posY;
+    public int getPosC() {
+        return posC;
     }
 
-    public void setPosY(int posY) {
-        this.posY = posY;
+    public void setPosC(int pos) {
+        if(pos < SizeScene && pos >= 0) {
+            this.posC = pos;
+        }
     }
 
-    public int getPosX() {
-        return posX;
+    public int getPosL() {
+        return posL;
     }
 
-    public void setPosX(int posX) {
-        this.posX = posX;
+    public void setPosL(int pos) {
+        if(pos < SizeScene && pos >= 0) {
+            this.posL = pos;
+        }
     }
 }

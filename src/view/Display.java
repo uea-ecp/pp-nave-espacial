@@ -21,48 +21,43 @@ public class Display {
             }
         }
     }
-    
+
     // set position X and Y from character
     public void updateCharacterPosition(Nave character) {
-        for (int i = 0; i < SizeScene; i++) {
-            if(i == character.getPosX()) {
-                for (int j = 0; j < SizeScene; j++) {
-                    if(j == character.getPosY()) {
-                        scene[i][j] = character.getSprite();
-                    }
-                }
-            }
-
-            if (i == character.getOldPosX()) {
-                for (int j = 0; j < SizeScene; j++) {
-                    if(j == character.getOldPosY()) {
-                        scene[i][j] = Separator;
-                    }
-                }
-            }
+        if (character.getOldPosC() != character.getPosC() ||
+            character.getOldPosL() != character.getPosL()) {
+            scene[character.getPosL()][character.getPosC()] = character.getSprite();
+            scene[character.getOldPosL()][character.getOldPosC()] = Separator;
+        }
+        
+        if(scene[character.getShootPosL()][character.getShootPosC()] == Separator) {
+            scene[character.getShootPosL()][character.getShootPosC()] = " ❖";
         }
     }
 
     public void printScene() {
-        System.out.println("______________________");
-        for (String[] line : scene) {
+        System.out.println("┍--------------------┒");
+
+        for (int i = 0; i < SizeScene; i++) {
             System.out.print("|");
-            for (String item : line) {
-                System.out.print(item + " ");
+
+            for (int j = 0; j < SizeScene; j++) {
+                System.out.print(scene[i][j] + " ");
             }
             System.out.print("|");
             System.out.print("\n");
         }
-        System.out.println("______________________");
+
+        System.out.println("┖--------------------┙");
     }
 
     public void printScoreboard(int hp, int energy) {
-        System.out.print("Vidas       ");
-        
-        for (int i = 0; i <= hp; i++) {
+        System.out.println("Vidas       ");
+
+        for (int i = 0; i < hp; i++) {
             System.out.print(" 💚");
         }
-        
+
         System.out.println("\nEnergia       " + energy);
     }
 
