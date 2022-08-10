@@ -1,5 +1,8 @@
 package view;
 
+import java.util.List;
+
+import model.Missile;
 import model.Nave;
 
 /* *
@@ -29,10 +32,28 @@ public class Display {
             scene[character.getPosL()][character.getPosC()] = character.getSprite();
             scene[character.getOldPosL()][character.getOldPosC()] = Separator;
         }
-        
-        if(scene[character.getShootPosL()][character.getShootPosC()] == Separator) {
-            scene[character.getShootPosL()][character.getShootPosC()] = " ❖";
+
+        List<Missile> missiles = character.getMissiles();
+
+        if(missiles != null && missiles.isEmpty() == false) {
+            for (Missile missile : missiles) {
+                if (missile.getOldPosL() != missile.getPosL()
+                    && missile.getPosL() >= 0 && missile.getPosL() < SizeScene) {
+                    if(scene[missile.getPosL()][missile.getPosC()] == Separator) {
+                        scene[missile.getPosL()][missile.getPosC()] = missile.getSprite();
+                    }
+                    
+                    if (missile.getOldPosL() != character.getPosL()) {
+                        scene[missile.getOldPosL()][missile.getPosC()] = Separator;
+                    }
+
+                    if(missile.getActive() == false && 
+                        scene[missile.getPosL()][missile.getPosC()] == missile.getSprite()) {
+                        scene[missile.getPosL()][missile.getPosC()] = Separator;
+                    }
+            }
         }
+    }
     }
 
     public void printScene() {
@@ -52,7 +73,7 @@ public class Display {
     }
 
     public void printScoreboard(int hp, int energy) {
-        System.out.println("Vidas       ");
+        System.out.print("Vidas       ");
 
         for (int i = 0; i < hp; i++) {
             System.out.print(" 💚");

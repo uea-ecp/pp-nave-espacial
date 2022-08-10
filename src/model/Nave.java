@@ -1,17 +1,19 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import view.Display;
 
 public class Nave extends NaveAbstract {
-    private int shootPosC;
-    private int shootPosL;
+    List<Missile> missiles;
 
     // lamina de occam
     public Nave(boolean type) {
         if(type) {
             setSprite("🚀");
+            missiles = new ArrayList<Missile>();
         } else setSprite("🛸");
 
         setEnergy(100);
@@ -32,24 +34,39 @@ public class Nave extends NaveAbstract {
     }
 
     public void shoot() {
-        setShootPosC(getPosC());
-        setShootPosL(getPosL()-1);
+        Missile missile = new Missile();
+        missile.setPosC(getPosC());
+        missile.setPosL(getPosL()+1);
+        missiles.add(missile);
     }
 
-    public int getShootPosC() {
-        return shootPosC;
+    public List<Missile> getMissiles() {
+        return this.missiles;
     }
 
-    public void setShootPosC(int shootPosX) {
-        this.shootPosC = shootPosX;
+    public List<Missile> getMissilesActives() {
+        List<Missile> actives = new ArrayList<Missile>();
+
+        if(missiles != null) {
+            for (Missile missile : missiles) {
+                if(missile.getActive()) {
+                    actives.add(missile);
+                } 
+            }
+        }
+
+        return actives;
     }
 
-    public int getShootPosL() {
-        return shootPosL;
-    }
-
-    public void setShootPosL(int shootPosY) {
-        this.shootPosL = shootPosY;
+    public void updatePosLMissiles() {
+        for (Missile missile : missiles) {
+            if(missile.getPosL() == 0) {
+                missile.setActive(false);
+            } else {
+                missile.setOldPosL(missile.getPosL());   
+                missile.setPosL(missile.getPosL());  
+            }
+        }
     }
 
     /* Implemments from abstract methods */

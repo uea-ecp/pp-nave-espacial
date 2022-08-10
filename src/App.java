@@ -1,5 +1,7 @@
+import java.util.List;
 import java.util.Scanner;
 
+import model.Missile;
 import model.Nave;
 import view.Display;
 
@@ -50,10 +52,20 @@ public class App {
 
         player.control(input);
 
-        if(player.getShootPosL() == enemy.getPosL() && 
-            player.getShootPosC() == enemy.getPosC()) {
-            enemyHit();
+        List<Missile> missiles = player.getMissiles();
+        if(missiles != null && missiles.isEmpty() == false) {
+            player.updatePosLMissiles();
+
+            for (Missile missile : missiles) {
+                if(missile.getPosL() == enemy.getPosL() && 
+                    missile.getPosC() == enemy.getPosC()) {
+                    enemyHit();
+                    missile.setActive(false);
+                }   
+            }
         }
+
+
 
         if(player.getPosL() == enemy.getPosL() && 
             player.getPosC() == enemy.getPosC()) {
@@ -78,5 +90,7 @@ public class App {
             System.out.println("Você ganhou!");
             running = false;
         }
+
+        
     }
 }
