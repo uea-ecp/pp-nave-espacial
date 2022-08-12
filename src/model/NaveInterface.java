@@ -9,13 +9,8 @@ public interface NaveInterface {
     int posC = 0;
     int oldPosL = 0;
     int oldPosC = 0;
-    int energy = 100;
-    int hp = 3;
     String sprite = "";
 
-    void lostHp();
-    void lostEnergy();
     void randomPosition(int value);
     int random(int value);
-    void control(String command);
 }

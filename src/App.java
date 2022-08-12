@@ -35,13 +35,18 @@ public class App {
     }
 
     static void gaming(){
-        while(running && player.getEnergy() > 0 && enemy.getEnergy() > 0){
-            scene.printScoreboard(player.getHp(), player.getEnergy());
-            scene.updateCharacterPosition(enemy);
+        while(running && player.getHp() > 0 && enemy.getEnergy() > 0){
+            scene.printScoreboard(player.getHp(), enemy.getEnergy());
             scene.updateCharacterPosition(player);
+            enemy.updateEnemyPosition();
+            scene.updateCharacterPosition(enemy);
             
             scene.printScene(player, enemy);
             controlPlayer();
+            if(player.getPosL() == enemy.getPosL() && 
+                player.getPosC() == enemy.getPosC()) {
+                colision();
+            }
         }
     }
 
@@ -64,13 +69,6 @@ public class App {
                 }   
             }
         }
-
-
-
-        if(player.getPosL() == enemy.getPosL() && 
-            player.getPosC() == enemy.getPosC()) {
-            colision();
-        }
     }
     
     static void colision() {
@@ -89,7 +87,7 @@ public class App {
     }
 
     static void enemyHit() {
-        enemy.lostHp();
+        enemy.lostEnergy();
 
         if(enemy.getEnergy() == 0) {
             System.out.println("Você ganhou!");

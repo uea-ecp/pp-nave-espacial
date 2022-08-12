@@ -11,13 +11,9 @@ abstract class NaveAbstract implements NaveInterface {
     private int oldPosC;
     private String sprite;
     private int hp;
-    private int energy;
 
     public abstract void randomPosition(int value);
     public abstract int random(int value);
-    public abstract void control(String command);
-    public abstract void lostHp();
-    public abstract void lostEnergy();
 
     public int getOldPosL() {
         return oldPosL;
@@ -41,14 +37,6 @@ abstract class NaveAbstract implements NaveInterface {
 
     public void setHp(int hp) {
         this.hp = hp;
-    }
-
-    public int getEnergy() {
-        return energy;
-    }
-
-    public void setEnergy(int energy) {
-        this.energy = energy;
     }
 
     public String getSprite() {

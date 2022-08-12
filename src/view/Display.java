@@ -1,6 +1,5 @@
 package view;
 
-import java.util.Arrays;
 import java.util.List;
 
 import model.Missile;
@@ -30,6 +29,7 @@ public class Display {
     public void updateCharacterPosition(Nave character) {
         if (character.getOldPosC() != character.getPosC() ||
             character.getOldPosL() != character.getPosL()) {
+
             scene[character.getPosL()][character.getPosC()] = character.getSprite();
             scene[character.getOldPosL()][character.getOldPosC()] = Separator;
         }

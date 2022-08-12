@@ -8,6 +8,7 @@ import view.Display;
 
 public class Nave extends NaveAbstract {
     List<Missile> missiles;
+    private int energy;
 
     // lamina de occam
     public Nave(boolean type) {
@@ -40,6 +41,8 @@ public class Nave extends NaveAbstract {
         return (new Random()).nextInt(value) + 1;
     }
 
+    /* Movimentação mais fluida com posicao +1 ou -1 */
+
     public void shoot() {
         Missile missile = new Missile();
         missile.setPosC(getPosC());
@@ -49,6 +52,14 @@ public class Nave extends NaveAbstract {
 
     public List<Missile> getMissiles() {
         return this.missiles;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
     }
 
     public List<Missile> getMissilesActives() {
@@ -71,13 +82,47 @@ public class Nave extends NaveAbstract {
                 missile.setActive(false);
             } else {
                 missile.setOldPosL(missile.getPosL());   
-                missile.setPosL(missile.getPosL());  
+                missile.moveMissile(missile.getPosL());  
             }
         }
     }
 
-    /* Implemments from abstract methods */
-    @Override
+    public void updateEnemyPosition() {
+        int posActualL = getPosL();
+        int posActualC = getPosC();
+
+        int posRandom = random(4);
+        
+        /* 
+         * 0 - Cima
+         * 1 - Direita
+         * 2 - Baixo
+         * 3 - Esquerda
+         */
+        if(posRandom == 0) {
+            setPosL(posActualL-1);
+        }
+        if(posRandom == 1) {
+            setPosC(posActualC-1);
+        }
+
+        if(posRandom == 2) {
+            setPosL(posActualL+1);
+        }
+        
+        if(posRandom == 3) {
+            setPosC(posActualC+1);
+        }
+
+        // teletransporta
+        if(getPosC() == getOldPosC() && getOldPosL() == getPosL()) {
+            randomPosition(Display.getSizeScene());
+        }
+
+        setOldPosC(posActualC);
+        setOldPosL(posActualL);
+    }
+
     public void control(String command) {
         int posActualL = getPosL();
         int posActualC = getPosC();
@@ -108,12 +153,10 @@ public class Nave extends NaveAbstract {
         setOldPosL(posActualL);
     }
 
-    @Override
     public void lostHp() {
         setHp(getHp() - 1);
     }
 
-    @Override
     public void lostEnergy() {
         setEnergy(getEnergy()-10);
         
