@@ -26,9 +26,7 @@ public class Missile extends EntidadeAbstract {
         setPosL(pos - 1);
     }
 
-    @Override
     public void randomPosition(int min, int max) {}
 
-    @Override
     public int random(int value) { return 0; }
 }

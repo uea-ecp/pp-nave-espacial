@@ -1,10 +1,11 @@
 package model;
 
 /* *
- * This class implemments the base to 'Naves'
+ * This class implemments the base to 'Naves' and 'Missiles'
  */
 abstract class EntidadeAbstract {
     private final static int SizeScene = 10;
+
     private int posL;
     private int posC;
     private int oldPosL;

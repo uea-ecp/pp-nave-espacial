@@ -72,7 +72,7 @@ public class App {
 
         if(enemy.getEnergy() == 0) {
             System.out.println("Você ganhou!");
-            running = false;
+            return;
         }
     }
 }

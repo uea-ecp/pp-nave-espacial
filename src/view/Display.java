@@ -55,19 +55,9 @@ public class Display {
                     if(missile.getPosL() == character.getPosL() && 
                         missile.getPosC() == character.getPosC()) {
                         character.lostEnergy();
-
-                        if(character.getEnergy() == 0) {
-                            System.out.println("Você ganhou!");
-                            return;
-                        }
                         
                         missile.setActive(false);
-                    }   
-                    
-                    // se houve colisão nessa celula, limpa
-                    /* if(scene[missile.getOldPosL()][missile.getOldPosC()] == "💥") {
-                        scene[missile.getOldPosL()][missile.getOldPosC()] = Separator;
-                    } */
+                    } 
 
                     if(scene[missile.getPosL()][missile.getPosC()] == missile.getSprite()) {
                         if (missile.getOldPosL() != character.getPosL()) {
@@ -111,16 +101,13 @@ public class Display {
             System.out.print("|");
 
             for (int j = 0; j < SizeScene; j++) {
-                System.out.print(scene[i][j]);
-                /* if(player.getPosL() == enemy.getPosL() && 
-                player.getPosC() == enemy.getPosC() && 
-                i == player.getPosL() && j == player.getPosC()) {
-                    System.out.print("💥");
-                } else System.out.print(scene[i][j]); */
+                //System.out.print(scene[i][j]);
 
-                if(j == enemy.getOldPosC() && i == enemy.getOldPosL() && hasAnyMissileInPos(player.getMissilesActives(), enemy.getPosL() , enemy.getPosC())) {
+                if(j == enemy.getPosC() && i == enemy.getPosL() && hasAnyMissileInPos(player.getMissilesActives(), enemy.getOldPosL() , enemy.getPosC())) {
                     System.out.print("💥");
-                }// else System.out.print(scene[i][j]);
+                    //System.out.print(" ");
+
+                } else System.out.print(scene[i][j]);
 
                 if(j == player.getPosC() && i == player.getPosL() 
                 || j == enemy.getPosC() && i == enemy.getPosL() 
