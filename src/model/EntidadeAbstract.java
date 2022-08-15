@@ -3,7 +3,7 @@ package model;
 /* *
  * This class implemments the base to 'Naves'
  */
-abstract class NaveAbstract implements NaveInterface {
+abstract class EntidadeAbstract {
     private final static int SizeScene = 10;
     private int posL;
     private int posC;
@@ -12,7 +12,7 @@ abstract class NaveAbstract implements NaveInterface {
     private String sprite;
     private int hp;
 
-    public abstract void randomPosition(int value);
+    public abstract void randomPosition(int min, int max);
     public abstract int random(int value);
 
     public int getOldPosL() {

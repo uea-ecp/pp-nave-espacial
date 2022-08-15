@@ -20,33 +20,29 @@ public class App {
         enemy = new Nave(false);
         scene.updateCharacterPosition(enemy);
         scene.updateCharacterPosition(player);
+        scene.printScene(player, enemy);
+        gaming();
+        running = scanner.nextInt() > 0;
     }
     
     public static void main(String[] args) throws Exception {
-        // initialize
         new App();
         
-        while(running) {
-            gaming();
-            running = scanner.nextInt() > 0;
-        }
-        
-        scanner.close();
+        if(running) {
+            new App();
+        } else scanner.close();
     }
 
     static void gaming(){
-        while(running && player.getHp() > 0 && enemy.getEnergy() > 0){
-            scene.printScoreboard(player.getHp(), enemy.getEnergy());
-            scene.updateCharacterPosition(player);
-            enemy.updateEnemyPosition();
-            scene.updateCharacterPosition(enemy);
+        while(player.getHp() > 0 && enemy.getEnergy() > 0){
+            if(player.getHp() > 0) {
+                enemy.updateEnemyPosition();
+                scene.updateCharacterPosition(enemy);
+                controlPlayer();
+                scene.updateCharacterPosition(player);
+            }
             
             scene.printScene(player, enemy);
-            controlPlayer();
-            if(player.getPosL() == enemy.getPosL() && 
-                player.getPosC() == enemy.getPosC()) {
-                colision();
-            }
         }
     }
 
@@ -59,8 +55,6 @@ public class App {
 
         List<Missile> missiles = player.getMissiles();
         if(missiles != null && missiles.isEmpty() == false) {
-            player.updatePosLMissiles();
-
             for (Missile missile : missiles) {
                 if(missile.getPosL() == enemy.getPosL() && 
                     missile.getPosC() == enemy.getPosC()) {
@@ -68,22 +62,9 @@ public class App {
                     missile.setActive(false);
                 }   
             }
+            player.updatePosLMissiles();
         }
-    }
-    
-    static void colision() {
-        player.lostHp();
-        
-        if(player.getHp() == 0) {
-            System.out.println("\n\n\n\n\n\n\n\n\n\nVocê perdeu! Deseja jogar de novo?");
-            System.out.println("(1) Sim \n(0) Não");
-            if(scanner.nextInt() > 0) {
-                new App();
-            } else {
-                running = false;
-                return;
-            }
-        }
+
     }
 
     static void enemyHit() {

@@ -6,34 +6,30 @@ import java.util.Random;
 
 import view.Display;
 
-public class Nave extends NaveAbstract {
+public class Nave extends EntidadeAbstract {
     List<Missile> missiles;
     private int energy;
 
     // lamina de occam
     public Nave(boolean type) {
-        int value;
+        int value = Display.getSizeScene()/2;
 
         if(type) {
             setSprite("🚀");
             missiles = new ArrayList<Missile>();
-            value = (Display.getSizeScene() - (Display.getSizeScene()/2)) + 1;
-            randomPosition(value);
+            randomPosition(value+1, Display.getSizeScene());
+            setHp(3);
         } else {
+            randomPosition(0, value);
             setSprite("🛸");
-            value = Display.getSizeScene()/2;
-            randomPosition(value);
+            setEnergy(100);
         }
-
-        setEnergy(100);
-        setHp(3);
-
     }
 
     /* Random position of according with scene limit size */
-    public void randomPosition(int value) {
-        setPosL(random(value)+1);
-        setPosC(random(value)+1);
+    public void randomPosition(int min, int max) {
+        setPosL(random(min, max));
+        setPosC(random(min, max));
     }
     
     /* Random value with scene limit size */
@@ -41,12 +37,16 @@ public class Nave extends NaveAbstract {
         return (new Random()).nextInt(value) + 1;
     }
 
+    public int random(int min, int max) {
+        return (new Random()).nextInt(max + 1 - min) + min;
+    }
+
     /* Movimentação mais fluida com posicao +1 ou -1 */
 
     public void shoot() {
         Missile missile = new Missile();
         missile.setPosC(getPosC());
-        missile.setPosL(getPosL()+1);
+        missile.setPosL(getPosL());
         missiles.add(missile);
     }
 
@@ -116,7 +116,10 @@ public class Nave extends NaveAbstract {
 
         // teletransporta
         if(getPosC() == getOldPosC() && getOldPosL() == getPosL()) {
-            randomPosition(Display.getSizeScene());
+            setSprite("🌀");
+            randomPosition(0, Display.getSizeScene());
+        } else {
+            setSprite("🛸");
         }
 
         setOldPosC(posActualC);
@@ -159,9 +162,5 @@ public class Nave extends NaveAbstract {
 
     public void lostEnergy() {
         setEnergy(getEnergy()-10);
-        
-        if(getEnergy() == 0) {
-            setSprite("💥");
-        }
     }
 }

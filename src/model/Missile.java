@@ -1,6 +1,6 @@
 package model;
 
-public class Missile extends NaveAbstract {
+public class Missile extends EntidadeAbstract {
     private boolean active;
 
     // lamina de occam
@@ -27,7 +27,7 @@ public class Missile extends NaveAbstract {
     }
 
     @Override
-    public void randomPosition(int value) {}
+    public void randomPosition(int min, int max) {}
 
     @Override
     public int random(int value) { return 0; }
