@@ -25,8 +25,4 @@ public class Missile extends EntidadeAbstract {
     public void moveMissile(int pos) {
         setPosL(pos - 1);
     }
-
-    public void randomPosition(int min, int max) {}
-
-    public int random(int value) { return 0; }
 }

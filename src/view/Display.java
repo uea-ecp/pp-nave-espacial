@@ -32,9 +32,6 @@ public class Display {
 
             scene[character.getOldPosL()][character.getOldPosC()] = Separator;
             scene[character.getPosL()][character.getPosC()] = character.getSprite();
-
-            /* if(scene[character.getOldPosL()][character.getOldPosC()] == character.getSprite()) {
-            } */
         }
 
         List<Missile> missiles = character.getMissiles();

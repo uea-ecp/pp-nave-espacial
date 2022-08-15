@@ -13,9 +13,6 @@ abstract class EntidadeAbstract {
     private String sprite;
     private int hp;
 
-    public abstract void randomPosition(int min, int max);
-    public abstract int random(int value);
-
     public int getOldPosL() {
         return oldPosL;
     }
